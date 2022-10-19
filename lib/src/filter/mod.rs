@@ -278,8 +278,8 @@ fn overlay(node: &mut Media, chain: &mut Filters, config: &PlayoutConfig) {
         && &node.category != "advertisement"
     {
         let mut logo_chain = format!(
-            "null[v];movie={}:loop=0,setpts=N/(FRAME_RATE*TB),format=rgba,colorchannelmixer=aa={}[l];[v][l]{}:shortest=1",
-            config.processing.logo, config.processing.logo_opacity, config.processing.logo_filter
+            "null[v];movie={}[l0];[l0]format=rgba,colorchannelmixer=aa=0.5[l];[v][l]overlay=main_w-overlay_w-25:25:format=auto,format=yuv420p",
+            config.processing.logo
         );
 
         if node.last_ad.unwrap_or(false) {
