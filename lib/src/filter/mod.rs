@@ -189,20 +189,20 @@ fn pad(aspect: f64, chain: &mut Filters, v_stream: &ffprobe::Stream, config: &Pl
                 scale = format!("scale=-1:{},", config.processing.height);
             }
         }
-        chain.add_filter(
-            &format!(
-                "{scale}pad=max(iw\\,ih*({0}/{1})):ow/({0}/{1}):(ow-iw)/2:(oh-ih)/2",
-                config.processing.width, config.processing.height
-            ),
-            0,
-            Video,
-        )
+        //chain.add_filter(
+        //    &format!(
+        //        "{scale}pad=max(iw\\,ih*({0}/{1})):ow/({0}/{1}):(ow-iw)/2:(oh-ih)/2",
+        //        config.processing.width, config.processing.height
+        //   ),
+        //    0,
+        //    Video,
+        //)
     }
 }
 
 fn fps(fps: f64, chain: &mut Filters, config: &PlayoutConfig) {
     if fps != config.processing.fps {
-        chain.add_filter(&format!("fps={}", config.processing.fps), 0, Video)
+        //chain.add_filter(&format!("fps={}", config.processing.fps), 0, Video)
     }
 }
 
@@ -229,11 +229,7 @@ fn scale(
         }
 
         if !is_close(aspect, config.processing.aspect, 0.03) {
-            chain.add_filter(
-                &format!("setdar=dar={}", config.processing.aspect),
-                0,
-                Video,
-            )
+            //chain.add_filter(                &format!("setdar=dar={}", config.processing.aspect),                0,                Video,            )
         }
     } else {
         chain.add_filter(
