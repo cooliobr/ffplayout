@@ -218,7 +218,7 @@ fn scale(
         if w != config.processing.width || h != config.processing.height {
             chain.add_filter(
                 &format!(
-                    "scale={}:{}",
+                    "scale_npp={}:{}:format=yuv420p",
                     config.processing.width, config.processing.height
                 ),
                 0,
@@ -238,7 +238,7 @@ fn scale(
     } else {
         chain.add_filter(
             &format!(
-                "scale={}:{}",
+                "scale_npp={}:{}:format=yuv420p",
                 config.processing.width, config.processing.height
             ),
             0,
@@ -278,7 +278,7 @@ fn overlay(node: &mut Media, chain: &mut Filters, config: &PlayoutConfig) {
         && &node.category != "advertisement"
     {
         let mut logo_chain = format!(
-            "null[v];movie={}[l0];[l0]format=rgba,colorchannelmixer=aa=0.5[l];[v][l]overlay=main_w-overlay_w-25:25:format=auto,format=yuv420p",
+            "null[v];movie={}[l0];[l0]format=rgba,colorchannelmixer=aa=0.4,hwupload_cuda[l];[v][l]overlay_cuda=main_w-overlay_w-50:33,realtime=speed=1",
             config.processing.logo
         );
 
