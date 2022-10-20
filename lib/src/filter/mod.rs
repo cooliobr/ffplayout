@@ -240,11 +240,11 @@ fn scale(
             0,
             Video,
         );
-        chain.add_filter(
-            &format!("setdar=dar={}", config.processing.aspect),
-            0,
-            Video,
-        )
+       // chain.add_filter(
+       //     &format!("setdar=dar={}", config.processing.aspect),
+       //     0,
+       //     Video,
+       // )
     }
 }
 
@@ -256,15 +256,15 @@ fn fade(node: &mut Media, chain: &mut Filters, nr: i32, filter_type: FilterType)
     }
 
     if node.seek > 0.0 || node.unit == Ingest {
-        chain.add_filter(&format!("{t}fade=in:st=0:d=0.5"), nr, filter_type)
+        //chain.add_filter(&format!("{t}fade=in:st=0:d=0.5"), nr, filter_type)
     }
 
     if node.out != node.duration && node.out - node.seek - 1.0 > 0.0 {
-        chain.add_filter(
-            &format!("{t}fade=out:st={}:d=1.0", (node.out - node.seek - 1.0)),
-            nr,
-            filter_type,
-        )
+        //chain.add_filter(
+        //    &format!("{t}fade=out:st={}:d=1.0", (node.out - node.seek - 1.0)),
+        //    nr,
+        //    filter_type,
+        //)
     }
 }
 
@@ -274,7 +274,7 @@ fn overlay(node: &mut Media, chain: &mut Filters, config: &PlayoutConfig) {
         && &node.category != "advertisement"
     {
         let mut logo_chain = format!(
-            "null[v];movie={}[l0];[l0]format=rgba,colorchannelmixer=aa=0.4,hwupload_cuda[l];[v][l]overlay_cuda=main_w-overlay_w-50:33,realtime=speed=1",
+            "null[v];movie={}[l0];[l0]format=rgba,colorchannelmixer=aa=0.4,hwupload_cuda[l];[v][l]overlay_cuda=main_w-overlay_w-50:33",
             config.processing.logo
         );
 
