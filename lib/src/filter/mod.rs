@@ -301,14 +301,14 @@ fn extend_video(node: &mut Media, chain: &mut Filters) {
         .and_then(|v| v.parse::<f64>().ok())
     {
         if node.out - node.seek > video_duration - node.seek + 0.1 && node.duration >= node.out {
-            chain.add_filter(
-                &format!(
-                    "tpad=stop_mode=add:stop_duration={}",
-                    (node.out - node.seek) - (video_duration - node.seek)
-                ),
-                0,
-                Video,
-            )
+            //chain.add_filter(
+            //    &format!(
+            //        "tpad=stop_mode=add:stop_duration={}",
+            //        (node.out - node.seek) - (video_duration - node.seek)
+            //    ),
+            //    0,
+            //    Video,
+            //)
         }
     }
 }
