@@ -21,8 +21,7 @@ fn check_media(
     begin: f64,
     config: &PlayoutConfig,
 ) -> Result<(), Error> {
-    let mut enc_cmd = vec_strings!["-hide_banner", "-nostats", "-v", "level+error"];
-    let mut error_list = vec![];
+    let mut enc_cmd = vec_strings!["-hide_banner", "-threads", "4", "-hwaccel", "cuvid", "-c:v", "h264_cuvid" ,"-fix_sub_duration", "-drop_second_field", "true", "-nostats", "-v", "level+error"];    let mut error_list = vec![];
 
     node.add_probe();
 
