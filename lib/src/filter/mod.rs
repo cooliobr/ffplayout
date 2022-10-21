@@ -225,13 +225,7 @@ fn scale(
                 Video,
             );
         } else {
-            chain.add_filter(
-                &format!(
-                    "scale_npp={}:{}:format=yuv420p",
-                    config.processing.width, config.processing.height
-                ),
-                0,
-                Video,
+            chain.add_filter("scale_npp={}:{}:format=yuv420p", 0, Video);
             );
         }
 
