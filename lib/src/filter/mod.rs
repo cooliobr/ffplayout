@@ -225,7 +225,7 @@ fn scale(
                 Video,
             );
         } else {
-            chain.add_filter("null", 0, Video);
+            chain.add_filter("scale_npp={}:{}:format=yuv420p", 0, Video);
         }
 
         if !is_close(aspect, config.processing.aspect, 0.03) {
